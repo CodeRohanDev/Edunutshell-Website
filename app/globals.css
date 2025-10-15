@@ -1,0 +1,430 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    @apply bg-dark-primary text-text-primary;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  #__next {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-primary text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-glow active:scale-95 flex items-center justify-center min-h-[48px] text-base leading-none;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-accent-blue text-accent-blue px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-accent-blue hover:text-dark-primary hover:shadow-glow active:scale-95 flex items-center justify-center min-h-[48px] text-base leading-none;
+  }
+
+  .btn-primary-sm {
+    @apply bg-gradient-primary text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-glow active:scale-95 flex items-center justify-center min-h-[40px] text-sm leading-none;
+  }
+
+  .btn-secondary-sm {
+    @apply border border-accent-blue text-accent-blue px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:bg-accent-blue hover:text-dark-primary hover:shadow-glow active:scale-95 flex items-center justify-center min-h-[40px] text-sm leading-none;
+  }
+
+  .card-dark {
+    @apply bg-dark-card border border-dark-border rounded-2xl p-6 shadow-card-dark transition-all duration-300 hover:shadow-glow hover:-translate-y-1;
+  }
+
+  .input-glow {
+    @apply bg-dark-card border border-dark-border rounded-xl px-4 py-3 text-text-primary placeholder-text-muted focus:border-accent-blue focus:shadow-glow focus:outline-none transition-all duration-300;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply py-12 md:py-20;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Futuristic glow effects */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(30, 64, 175, 0.25);
+}
+
+.glow-pink {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+}
+
+/* 3D card perspective */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Animated background gradients */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Neon border animation */
+@keyframes accent-border {
+
+  0%,
+  100% {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+  }
+
+  50% {
+    border-color: rgba(30, 64, 175, 0.4);
+    box-shadow: 0 0 20px rgba(30, 64, 175, 0.2);
+  }
+}
+
+.accent-border {
+  animation: accent-border 3s ease-in-out infinite;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+/* Smooth scrolling for horizontal containers */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Touch scrolling for mobile */
+.scrollbar-hide {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Swiper-like auto-scroll container styles */
+.auto-scroll-container {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.auto-scroll-container>div {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.auto-scroll-container .card-dark {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Ensure cards maintain size during scroll */
+.stats-card {
+  flex: 0 0 auto;
+  width: 288px !important;
+  min-width: 288px !important;
+  transform: translateZ(0);
+  /* Force hardware acceleration */
+}
+
+@media (max-width: 768px) {
+  .stats-card {
+    width: 256px !important;
+    min-width: 256px !important;
+  }
+}
+
+/* Smooth animation keyframes for auto-scroll */
+@keyframes smooth-scroll-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.smooth-auto-scroll {
+  animation: smooth-scroll-rtl linear infinite;
+}
+
+/* Ultra-Smooth Swiper Styles - Matching Swiper.js Performance */
+.popular-courses-swiper {
+  overflow: visible !important;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.popular-courses-swiper .swiper-wrapper {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition-delay: 0ms !important;
+}
+
+.popular-courses-swiper .swiper-slide {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Hardware acceleration for course cards */
+.popular-courses-swiper .card-dark {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Swiper initialization classes */
+.popular-courses-swiper.swiper-initialized {
+  backface-visibility: hidden;
+}
+
+.popular-courses-swiper.swiper-horizontal {
+  touch-action: pan-y;
+}
+
+.popular-courses-swiper.swiper-backface-hidden .swiper-slide {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Enhanced performance matching Swiper.js */
+.popular-courses-swiper * {
+  box-sizing: border-box;
+}
+
+/* Smooth transitions for active slides */
+.popular-courses-swiper .swiper-slide-active,
+.popular-courses-swiper .swiper-slide-next,
+.popular-courses-swiper .swiper-slide-prev {
+  opacity: 1;
+  transform: none;
+}
+
+/* Enhanced Popular Courses Swiper Styles */
+.popular-courses-swiper {
+  padding: 20px 0 40px 0 !important;
+  margin: 0 -20px !important;
+}
+
+.popular-courses-swiper .swiper-slide {
+  height: auto !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.popular-courses-swiper .swiper-slide:not(.swiper-slide-active) {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.popular-courses-swiper .swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Custom Pagination Styles */
+.swiper-pagination-bullet-custom {
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(107, 114, 128, 0.5) !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  margin: 0 6px !important;
+}
+
+.swiper-pagination-bullet-active-custom {
+  background: #3b82f6 !important;
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Enhanced Navigation Button Styles */
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4) !important;
+}
+
+.swiper-button-prev-custom:hover svg,
+.swiper-button-next-custom:hover svg {
+  color: white !important;
+}
+
+/* Smooth scroll behavior */
+.popular-courses-swiper .swiper-wrapper {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Popular Courses Auto-Scroll Styles */
+.popular-courses-container {
+  overflow: visible !important;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.popular-courses-container .auto-scroll-container {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.popular-courses-container .auto-scroll-container>div {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.popular-courses-container .card-dark {
+  will-change: transform;
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+/* Ensure course cards maintain size during scroll */
+.course-card {
+  flex: 0 0 auto;
+  width: 380px !important;
+  min-width: 380px !important;
+  transform: translateZ(0);
+  /* Force hardware acceleration */
+}
+
+@media (max-width: 1024px) {
+  .course-card {
+    width: 340px !important;
+    min-width: 340px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-card {
+    width: 300px !important;
+    min-width: 300px !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .popular-courses-swiper {
+    padding: 10px 0 30px 0 !important;
+    margin: 0 -10px !important;
+  }
+
+  .swiper-button-prev-custom,
+  .swiper-button-next-custom {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .swiper-button-prev-custom {
+    left: 10px !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .swiper-button-next-custom {
+    right: 10px !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+/* Prevent horizontal overflow globally */
+* {
+  box-sizing: border-box;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+
+/* Ensure all sections respect viewport width */
+section {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Responsive container adjustments */
+@media (max-width: 640px) {
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Fix for potential transform issues */
+.auto-scroll-container {
+  contain: layout style paint;
+}
