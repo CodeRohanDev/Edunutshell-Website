@@ -9,12 +9,23 @@ import { motion } from 'framer-motion'
 export default function EnrollPage() {
   const params = useParams()
   const router = useRouter()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isLoading, isAdmin } = useAuth()
   const [courseTitle, setCourseTitle] = useState('')
   const [coursePrice, setCoursePrice] = useState(0)
   const courseId = params.id as string
 
   useEffect(() => {
+    // Don't redirect while still loading authentication state
+    if (isLoading) {
+      return
+    }
+
+    // Redirect admins to admin dashboard
+    if (isAdmin) {
+      router.push('/admin')
+      return
+    }
+
     // Redirect to login if not authenticated
     if (!isAuthenticated) {
       localStorage.setItem('enrollCourseId', courseId)
@@ -42,7 +53,7 @@ export default function EnrollPage() {
       // Default price if not available
       setCoursePrice(9999)
     }
-  }, [isAuthenticated, courseId, router])
+  }, [isAuthenticated, isLoading, courseId, router])
 
   const handleClose = () => {
     // Clear enrollment data
@@ -53,6 +64,39 @@ export default function EnrollPage() {
     router.push(`/courses/${courseId}`)
   }
 
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-dark-primary via-dark-secondary to-dark-primary flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center"
+        >
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-blue mx-auto mb-4"></div>
+          <p className="text-text-secondary">Loading...</p>
+        </motion.div>
+      </div>
+    )
+  }
+
+  // Redirect admins
+  if (isAdmin) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-dark-primary via-dark-secondary to-dark-primary flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center"
+        >
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-blue mx-auto mb-4"></div>
+          <p className="text-text-secondary">Admins cannot enroll. Redirecting...</p>
+        </motion.div>
+      </div>
+    )
+  }
+
+  // Show loading while redirecting unauthenticated users
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-dark-primary via-dark-secondary to-dark-primary flex items-center justify-center">

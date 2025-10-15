@@ -29,7 +29,7 @@ const CourseDetailPage = () => {
     const params = useParams()
     const router = useRouter()
     const courseId = params.id as string
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated, isAdmin } = useAuth()
     const { course, isLoading, error } = useCourse(courseId)
     const { isEnrolledInCourse } = useEnrollments()
 
@@ -38,6 +38,12 @@ const CourseDetailPage = () => {
 
     const handleEnrollClick = () => {
         if (!course) return
+        
+        // Prevent admins from enrolling
+        if (isAdmin) {
+            alert('Admins cannot enroll in courses. Please use a student account.')
+            return
+        }
         
         if (!isAuthenticated) {
             // Store intended course for redirect after login

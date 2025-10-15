@@ -16,10 +16,15 @@ export default function ProtectedRoute({
   allowedRoles,
   requireAuth = true 
 }: ProtectedRouteProps) {
-  const { user, isAuthenticated } = useAuth()
+  const { user, isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
+    // Don't redirect while still loading authentication state
+    if (isLoading) {
+      return
+    }
+
     // If authentication is required but user is not authenticated
     if (requireAuth && !isAuthenticated) {
       router.push('/login')
@@ -37,15 +42,27 @@ export default function ProtectedRoute({
         router.push('/')
       }
     }
-  }, [isAuthenticated, user, allowedRoles, requireAuth, router])
+  }, [isAuthenticated, user, allowedRoles, requireAuth, router, isLoading])
 
-  // Show loading or nothing while checking authentication
-  if (requireAuth && !isAuthenticated) {
+  // Show loading while checking authentication
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-dark-primary flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-accent-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-text-secondary">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show loading while redirecting unauthenticated users
+  if (requireAuth && !isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-dark-primary flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-accent-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-text-secondary">Redirecting to login...</p>
         </div>
       </div>
     )

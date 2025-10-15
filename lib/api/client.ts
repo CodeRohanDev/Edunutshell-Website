@@ -113,7 +113,13 @@ class ApiClient {
       if (error instanceof ApiError) {
         throw error
       }
-      throw new ApiError('Network error occurred')
+      
+      // Provide more helpful error messages
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new ApiError('Unable to connect to server. Please check your internet connection or try again later.')
+      }
+      
+      throw new ApiError('Network error occurred. The server may be unavailable.')
     }
   }
 

@@ -19,7 +19,6 @@ const getCourseData = (id: string) => ({
 export default function StudentEnrollPage() {
   const params = useParams()
   const router = useRouter()
-  const { isAuthenticated } = useAuth()
   const courseId = params.id as string
   const [courseData, setCourseData] = useState<any>(null)
 

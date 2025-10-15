@@ -1,6 +1,6 @@
 // API Configuration
 export const API_CONFIG = {
-  BASE_URL: 'https://edunutshell-lms.onrender.com',
+  BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'https://edunutshell-lms.onrender.com',
   ENDPOINTS: {
     // Auth endpoints
     AUTH: {
